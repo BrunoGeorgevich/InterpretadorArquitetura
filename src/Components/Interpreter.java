@@ -18,6 +18,7 @@ public class Interpreter {
 	static final int NONE = -1;
 	
 	public static void interpret(int memory[], int starting_adress) {
+		run_bit = true;
 		PC = starting_adress;
 		AC = 0; data_loc = -1;
 		Interpreter.memory = memory;
@@ -48,6 +49,7 @@ public class Interpreter {
 	}
 	private static int find_data(int instr, int type) { 
 		if(type == NONE) return -1;
+		else  if(type == CLEAN) return data_loc;
 		else return 1+data_loc;
 	}
 	private static void execute(int type, int data) {
@@ -69,8 +71,10 @@ public class Interpreter {
 			break;
 		default:
 			run_bit = false;
+			System.out.println("Resultado :" + AC);
 			break;
 		}
-		System.out.println("ACUMULADOR AC= " + AC + "\n PC = " + PC + "\n INSTR = " + instr + "\n Data = " + data);
+//		if(run_bit)
+//			System.out.println("ACUMULADOR AC= " + AC + "\n PC = " + PC + "\n INSTR = " + instr + "\n Data = " + data);
 	}
 }
